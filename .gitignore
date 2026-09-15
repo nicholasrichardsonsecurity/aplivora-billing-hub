@@ -14,3 +14,25 @@ coverage/
 .DS_Store
 .vscode/
 .idea/
+
+# Artefatos locais de frontend e ferramentas
+.next/
+.turbo/
+out/
+*.tsbuildinfo
+__pycache__/
+*.pyc
+
+# Estado local e credenciais de ferramentas
+.codex/
+.terraform/
+*.tfstate
+*.tfstate.*
+*.pfx
+*.p8
+
+# Dumps e backups locais (não impede commits forçados ou arquivos já rastreados)
+*.dump
+*.sql.gz
+*.backup
+*.bak

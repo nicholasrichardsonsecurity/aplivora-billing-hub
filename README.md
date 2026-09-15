@@ -5,7 +5,7 @@
 [![Status: fundação](https://img.shields.io/badge/status-funda%C3%A7%C3%A3o%20e%20arquitetura-2563eb?style=for-the-badge)](https://github.com/nicholasrichardsonsecurity/aplivora-billing-hub)
 [![Licença proprietária](https://img.shields.io/badge/licen%C3%A7a-propriet%C3%A1ria-b91c1c?style=for-the-badge)](./LICENSE)
 [![Documentação](https://img.shields.io/badge/docs-OpenAPI%20planejada-16a34a?style=for-the-badge)](./docs)
-[![Segurança](https://img.shields.io/badge/security-LGPD%20%7C%20audit%C3%A1vel-0f766e?style=for-the-badge)](./SECURITY.md)
+[![Segurança: requisitos](https://img.shields.io/badge/seguran%C3%A7a-requisitos%20documentados-64748b?style=for-the-badge)](./SECURITY.md)
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-planejado-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-planejado-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -24,27 +24,46 @@ A proposta é concentrar regras financeiras e integrações sensíveis em uma ca
 
 > **Importante:** este repositório está em fase de fundação. Os itens descritos como “planejados” representam a direção arquitetural e não significam que uma API ou integração já esteja em produção.
 
+## Estado verificável
+
+A auditoria da base encontrou documentação e configuração Git, sem código de aplicação. Esta revisão adiciona documentação técnica e verificações locais; não entrega o serviço de billing.
+
+| Área | Evidência neste repositório |
+|---|---|
+| Documentação | README, políticas, avisos e relatório em [docs](./docs/README.md) |
+| API e painel | Não implementados |
+| Pagamentos e integrações | Planejados, sem adaptadores ou contratos executáveis |
+| Stack | Proposta, sem manifesto ou arquivo de dependências travadas |
+| Build, typecheck e testes de aplicação | Não aplicáveis enquanto não existir aplicação |
+| Verificações documentais | Script local e testes; veja [validação](./docs/README.md#validação-local) |
+| CI e Security Gate | Não configurados na árvore auditada; aprovação não comprovada |
+| Segurança e privacidade | Requisitos documentados, sem certificação de conformidade |
+
+Use o [relatório de auditoria](./docs/auditoria-fundacao.md) para distinguir correções, propostas e decisões pendentes.
+
 ## Ecossistema Aplivora
 
 O Hub será preparado para atender diferentes produtos e superfícies operacionais:
 
-[![Aplivora](https://img.shields.io/badge/Aplivora-ecossistema-0f172a?style=flat-square)](https://aplivora.com.br)
-[![LinkOps Hub](https://img.shields.io/badge/LinkOps%20Hub-GovTech%20%7C%20opera%C3%A7%C3%B5es-2563eb?style=flat-square)](https://linkops.aplivora.com.br)
-[![Quero Internet](https://img.shields.io/badge/Quero%20Internet-conectividade-06b6d4?style=flat-square)](https://querointernet.aplivora.com.br)
-[![LoopClub](https://img.shields.io/badge/LoopClub-produto%20digital-16a34a?style=flat-square)](https://loopclub.aplivora.com.br)
-[![Paperclip](https://img.shields.io/badge/Paperclip-coordena%C3%A7%C3%A3o%20de%20agentes-7c3aed?style=flat-square)](https://agentes.aplivora.com.br)
-[![Banana](https://img.shields.io/badge/Banana-opera%C3%A7%C3%A3o%20t%C3%A9cnica-f59e0b?style=flat-square)](#sistemas-e-integrações)
+[![Aplivora](https://img.shields.io/badge/Aplivora-ecossistema-0f172a?style=flat-square)](#sistemas-e-integrações-previstas)
+[![LinkOps Hub](https://img.shields.io/badge/LinkOps%20Hub-escopo%20a%20validar-2563eb?style=flat-square)](#sistemas-e-integrações-previstas)
+[![Quero Internet](https://img.shields.io/badge/Quero%20Internet-conectividade-06b6d4?style=flat-square)](#sistemas-e-integrações-previstas)
+[![LoopClub](https://img.shields.io/badge/LoopClub-produto%20digital-16a34a?style=flat-square)](#sistemas-e-integrações-previstas)
+[![Paperclip](https://img.shields.io/badge/Paperclip-coordena%C3%A7%C3%A3o%20de%20agentes-7c3aed?style=flat-square)](#sistemas-e-integrações-previstas)
+[![Banana](https://img.shields.io/badge/Banana-opera%C3%A7%C3%A3o%20t%C3%A9cnica-f59e0b?style=flat-square)](#sistemas-e-integrações-previstas)
 
 ### Sistemas e integrações previstas
 
 - **Aplivora:** ecossistema institucional e governança de produtos.
-- **LinkOps Hub:** programas, operações, parceiros e jornadas de atendimento.
+- **LinkOps Hub:** consumidor previsto; confirmar escopo comercial antes de vincular ofertas ou cobranças. A documentação anterior mistura serviços técnicos e programas públicos.
 - **Quero Internet:** oferta e operação de conectividade.
 - **LoopClub:** produto digital e experiências de assinatura.
 - **Banana:** sistema operacional/técnico da operação, quando aplicável.
 - **Paperclip:** coordenação e gestão de agentes; não substitui o Billing Hub.
 - **Asaas:** provedor de pagamentos e serviços financeiros, sujeito à validação do contrato e da integração.
 - **Bancos, mensageria e outros provedores:** somente mediante decisão arquitetural, requisitos de segurança e implementação aprovada.
+
+Os badges identificam o ecossistema, não integrações ativas. A inclusão de Banana e Paperclip não autoriza acesso a dados financeiros nem transferência de suas responsabilidades ao Billing Hub. Novos produtos exigem escopo e contrato aprovados.
 
 ## Responsabilidades do Billing Hub
 
@@ -82,7 +101,7 @@ O Hub será preparado para atender diferentes produtos e superfícies operaciona
 
 ### Eventos e integrações
 
-- webhooks assinados e idempotentes;
+- webhooks autenticados conforme o contrato de cada provedor, com processamento idempotente;
 - eventos de domínio versionados;
 - retentativas e fila de processamento;
 - correlação entre cobrança, cliente e produto;
@@ -97,7 +116,7 @@ flowchart LR
     B --> D[Provedores de pagamento]
     B --> E[Webhooks e eventos]
     E --> A
-    B --> F[Painel administrativo]
+    F[Painel administrativo] --> B
 ~~~
 
 A arquitetura final será definida junto com os requisitos de volume, disponibilidade, compliance, custos, operação e integrações reais.
@@ -112,9 +131,11 @@ A arquitetura final será definida junto com os requisitos de volume, disponibil
 | Contratos | OpenAPI | Documentação e integração |
 | Infraestrutura | Docker | Ambientes reproduzíveis |
 | Observabilidade | Logs estruturados e métricas | Diagnóstico e operação |
-| Integrações | Webhooks assinados | Eventos externos e internos |
+| Integrações | Webhooks autenticados | Eventos externos e internos |
 
 A stack acima é uma direção inicial. Dependências e escolhas definitivas devem ser registradas em ADRs ou documentação técnica antes da implementação.
+
+Uma ADR é um registro de decisão arquitetural. Nenhuma proposta de stack substitui uma decisão aprovada. Consulte os [requisitos e decisões pendentes](./docs/requisitos-tecnicos.md).
 
 ## Princípios de projeto
 
@@ -165,9 +186,10 @@ Este projeto poderá tratar dados cadastrais, comerciais e financeiros. Portanto
 
 - nunca commitar tokens, senhas, chaves ou certificados;
 - não armazenar dados brutos de cartão;
-- validar assinatura, timestamp e idempotência de webhooks;
+- implementar autenticação e proteção contra repetição conforme os mecanismos reais de cada provedor;
+- garantir idempotência no banco, inclusive com eventos concorrentes;
 - aplicar controle de acesso por organização, ambiente e função;
-- redigir dados sensíveis em logs;
+- mascarar ou remover dados sensíveis dos logs;
 - manter trilhas de auditoria protegidas;
 - documentar retenção, finalidade e descarte de dados;
 - revisar integrações sob a ótica da LGPD;
@@ -179,17 +201,9 @@ Leia [SECURITY.md](./SECURITY.md) antes de reportar ou testar vulnerabilidades.
 
 O projeto ainda está sendo estruturado. Quando a primeira aplicação estiver disponível, esta seção deverá conter os comandos oficiais de instalação, desenvolvimento, testes, migrações e deploy.
 
-Exemplo de fluxo esperado:
+Não há comandos de instalação, build ou deploy de aplicação disponíveis. Não execute migrações nem conecte este repositório ao banco de outro SaaS.
 
-~~~bash
-npm install
-npm run dev
-npm run lint
-npm run typecheck
-npm test
-~~~
-
-Não execute comandos acima esperando que funcionem antes da implementação dos respectivos aplicativos e scripts.
+As únicas verificações executáveis desta fundação estão no [guia de validação local](./docs/README.md#validação-local). Elas verificam documentação, não segurança da aplicação.
 
 ## Governança do repositório
 
@@ -205,6 +219,8 @@ Alterações devem seguir o fluxo:
 8. fazer merge somente com aprovação autorizada.
 
 Consulte [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+A descrição deste fluxo não configura proteções no GitHub. O mantenedor ainda precisa configurar checks obrigatórios e regras de branch. Não considere a ausência de checks como aprovação.
 
 ## Licenciamento
 
