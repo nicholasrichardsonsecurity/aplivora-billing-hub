@@ -17,6 +17,14 @@ Todo Pull Request deve incluir objetivo, impacto, riscos, testes, migrations, mu
 
 Nenhuma alteração de produção deve ser feita sem revisão, CI aprovado, Security Gate aprovado e autorização do responsável.
 
+## Verificações nesta fase
+
+Execute a [validação local](./docs/README.md#validação-local) para mudanças documentais. Registre comando, resultado e revisão testada no PR.
+
+Não há aplicação para executar build, typecheck ou testes funcionais. Marque esses itens como não aplicáveis com justificativa, nunca como aprovados. CI (integração contínua) e Security Gate (verificação de segurança) ainda precisam ser configurados; checks ausentes não significam aprovação.
+
+Use Issue, branch e Pull Request também para documentação. Não altere a branch principal diretamente. Não faça merge sem revisão humana e as verificações aplicáveis.
+
 Prefira mensagens Conventional Commits, como:
 
 ~~~text
